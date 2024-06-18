@@ -72,13 +72,13 @@ const Home = () => {
                    type="text" value={newTodoDescription}
                    onChange={(e) => setNewTodoDescription(e.target.value)}
                    placeholder={'Add Todo'}/>
-                <img src={'/add_icon.svg'} onClick={handleAddTodo}/>
+                <img src={'/add_icon.svg'} onClick={handleAddTodo} alt={'add_icon'}/>
             </div>
             <div className={'todo_list'}>
                 {((todos && todos.length > 0) ? todos.map((todo, index) => (
                     <div key={todo._id} className={`todo_item ${index%2 === 1 ? 'grey_bg' : ''}`}>
                         <span>{todo.description}</span>
-                        <img src={'/cross_icon.svg'} onClick={() => handleDeleteTodo(todo._id)}/>
+                        <img src={'/cross_icon.svg'} onClick={() => handleDeleteTodo(todo._id)} alt={'cross_icon'}/>
                     </div>))
                         :
                         <h3>No Todos ...</h3>
