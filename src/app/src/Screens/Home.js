@@ -49,6 +49,14 @@ const Home = () => {
         }
     }
     const handleAddTodo = () => {
+        if(newTodoDescription.length === 0){
+            toast.error("Please enter a description.");
+            return
+        }
+        if(newTodoDescription.length > 200){
+            toast.error("Description cannot exceed 200 characters.");
+            return;
+        }
         toAddTodo({"description" : newTodoDescription}).then().catch();
         setNewTodoDescription('');
     }
