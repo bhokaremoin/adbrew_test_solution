@@ -4,6 +4,7 @@ Hii, Moin here, this is my solution to the Django + React + Docker Test.
 Also along with Fetch all todos, and add todos, I have also added delete todo.
 
 ![solution.png](solution.png)
+Screenshot on Solution and find the attached solution recording.
 
 # Docker and Setup Fixes
 1. Change in Dockerfile to fix the Download of Mongo to build the image. Remove the existing wget command and replaced with the curl command given in the Officail Documentation of MongoDB
