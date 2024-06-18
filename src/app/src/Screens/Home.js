@@ -6,7 +6,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const Home = () => {
     const [todos, setTodos] = useState([]);
     const [newTodoDescription, setNewTodoDescription] = useState('');
-
     useEffect(()=>{
         toGetAllTodos().then().catch();
     },[]);
@@ -23,7 +22,6 @@ const Home = () => {
             console.error(error);
         }
     }
-
     async function toAddTodo(payload) {
         try {
             const response = await addTodo(payload);
@@ -37,7 +35,6 @@ const Home = () => {
             console.error(error);
         }
     }
-
     async function toDeleteTodo(payload) {
         try {
             const response = await deleteTodo(payload);
@@ -51,7 +48,6 @@ const Home = () => {
             console.error(error);
         }
     }
-
     const handleAddTodo = () => {
         toAddTodo({"description" : newTodoDescription}).then().catch();
         setNewTodoDescription('');
@@ -60,27 +56,28 @@ const Home = () => {
     const handleDeleteTodo = (id) => {
         toDeleteTodo(id).then().catch();
     }
-
     return <div>
-        <div>
-            <h1>Todo List</h1>
-            <div>
-                {((todos && todos.length > 0) && todos.map((todo, index) => (
-                <li key={todo._id}>
-                    <span>
-                    {todo.description}</span>
-                    <button onClick={() => handleDeleteTodo(todo._id)}>x</button>
-                </li>)))}
+        <div className={'todo_container'}>
+            <h1 className={'heading'}>Todos List</h1>
+            <div className={'add_todo_container'}>
+                <input className={'add_todo_input'}
+                   type="text" value={newTodoDescription}
+                   onChange={(e) => setNewTodoDescription(e.target.value)}
+                   placeholder={'Add Todo'}/>
+                <img src={'/add_icon.svg'} onClick={handleAddTodo}/>
+            </div>
+            <div className={'todo_list'}>
+                {((todos && todos.length > 0) ? todos.map((todo, index) => (
+                    <div key={todo._id} className={`todo_item ${index%2 === 1 ? 'grey_bg' : ''}`}>
+                        <span>{todo.description}</span>
+                        <img src={'/cross_icon.svg'} onClick={() => handleDeleteTodo(todo._id)}/>
+                    </div>))
+                        :
+                        <h3>No Todos ...</h3>
+                )}
             </div>
         </div>
-        <div>
-            <span>Add Todo</span>
-                <input type="text" value={newTodoDescription}
-                       onChange={(e) => setNewTodoDescription(e.target.value)}
-                       placeholder={'Enter Description'}/>
-                <button onClick={handleAddTodo}>+</button>
-        </div>
-        <ToastContainer />
+        <ToastContainer/>
     </div>
 }
 
